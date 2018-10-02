@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FixingReader.cs" />
+    <Compile Include="MyDateTimeConverter.cs" />
+    <Compile Include="MyDecimalConverter.cs" />
+    <Compile Include="MyInt32Converter.cs" />
+    <Compile Include="PortfolioDao.cs" />
     <Compile Include="PortfolioWatch.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -24,42 +24,9 @@ namespace PortfolioWatch
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            String transactions = this.txtTransactions.Text;
-            List<TransactionCsv> list = null;
-            List<PortfolioRecord> portfolioList = null;
-            using (StreamReader reader = new StreamReader(transactions))
-            {
-                var csv = new CsvReader(reader);
-                list = csv.GetRecords<TransactionCsv>().ToList();
-            }
-
-            if(!String.IsNullOrEmpty(this.txtPortfolio.Text) && File.Exists(this.txtPortfolio.Text))
-            {
-                using (StreamReader reader = new StreamReader(this.txtPortfolio.Text))
-                {
-                    var csv = new CsvReader(reader);
-                    portfolioList = csv.GetRecords<PortfolioRecord>().ToList();
-                }
-
-                List<Transaction> finalList = new List<Transaction>();
-                foreach(var trans in list)
-                {
-                    PortfolioRecord match = portfolioList.FirstOrDefault(x => x.ISIN == trans.ISIN);
-                    if(match != null)
-                    {
-                        finalList.Add(new Transaction(trans) { CurrentValue = match.WertDecimal / match.Anzahl });
-                    }
-                }
-
-                finalList.Sort((x, y) => x.Perf.CompareTo(y.Perf));
-                this.dataGridView1.DataSource = finalList;
-            }
-            else
-            {
-                this.dataGridView1.DataSource = list;
-            }
-
-            
+            PortfolioDao dao = new PortfolioDao();
+            var records = dao.GetData(this.txtTransactions.Text, this.txtPortfolio.Text);
+            this.dataGridView1.DataSource = records;
         }
 
         private void Form1_Load(object sender, EventArgs e)
