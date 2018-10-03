@@ -34,6 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnAggregate = new System.Windows.Forms.Button();
+            this.btnSingleTransactions = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -93,11 +95,33 @@
             this.dataGridView1.Size = new System.Drawing.Size(1006, 192);
             this.dataGridView1.TabIndex = 5;
             // 
+            // btnAggregate
+            // 
+            this.btnAggregate.Location = new System.Drawing.Point(79, 158);
+            this.btnAggregate.Name = "btnAggregate";
+            this.btnAggregate.Size = new System.Drawing.Size(126, 47);
+            this.btnAggregate.TabIndex = 6;
+            this.btnAggregate.Text = "Aggregate";
+            this.btnAggregate.UseVisualStyleBackColor = true;
+            this.btnAggregate.Click += new System.EventHandler(this.btnAggregate_Click);
+            // 
+            // btnSingleTransactions
+            // 
+            this.btnSingleTransactions.Location = new System.Drawing.Point(272, 158);
+            this.btnSingleTransactions.Name = "btnSingleTransactions";
+            this.btnSingleTransactions.Size = new System.Drawing.Size(126, 47);
+            this.btnSingleTransactions.TabIndex = 7;
+            this.btnSingleTransactions.Text = "Single";
+            this.btnSingleTransactions.UseVisualStyleBackColor = true;
+            this.btnSingleTransactions.Click += new System.EventHandler(this.btnSingleTransactions_Click);
+            // 
             // PortfolioWatch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1037, 450);
+            this.Controls.Add(this.btnSingleTransactions);
+            this.Controls.Add(this.btnAggregate);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -124,5 +148,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnAggregate;
+        private System.Windows.Forms.Button btnSingleTransactions;
     }
 }

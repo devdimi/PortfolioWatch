@@ -27,6 +27,7 @@ namespace PortfolioWatch
             this.Currency = transactionCsv.Currency;
             this.Price = transactionCsv.Price;
             this.ISIN = transactionCsv.ISIN;
+            this.Anzahl = transactionCsv.Anzahl;
         }
 
         public decimal CurrentValue { get; set; }
@@ -42,6 +43,16 @@ namespace PortfolioWatch
 
                 var r = (CurrentValue - this.Price) / Price;
                 return r * 100;
+            }
+        }
+
+        public decimal PerfMonth
+        {
+            get
+            {
+                decimal numMonths = (decimal)(DateTime.Now - this.Datum).Days / (decimal)30;
+                decimal perfPerMonth = this.Perf / numMonths;
+                return perfPerMonth;
             }
         }
     }
@@ -60,7 +71,7 @@ namespace PortfolioWatch
                     return default(decimal);
                 }
 
-                var r = this.Wert.Replace("\"", String.Empty).Replace(",", ".");
+                var r = this.Wert.Replace("\"", String.Empty); ////.Replace(",", ".");
                 decimal result;
                 if(decimal.TryParse(r, out result))
                 {
@@ -70,5 +81,14 @@ namespace PortfolioWatch
                 return default(decimal);
             }
         }
+    }
+
+    public class PortfolioAggregate
+    {
+        public String ISIN { get; set; }
+        public String Produkt { get; set; }
+        public decimal CurrentPrice { get; set; }
+        public decimal AveragePrice { get; set; }
+        public decimal Perf { get; set; }
     }
 }

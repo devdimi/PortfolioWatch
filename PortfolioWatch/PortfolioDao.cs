@@ -41,8 +41,8 @@ namespace PortfolioWatch
             List<TransactionCsv> list = null;
             List<PortfolioRecord> portfolioList = null;
 
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de-DE");
+            Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
 
             FixingReader reader1 = new FixingReader(transactions);
             using (StreamReader reader = new StreamReader(transactions))
