@@ -107,21 +107,25 @@ namespace PortfolioWatch
             if(this.transactions == null) { return; }
             var groups = this.transactions.GroupBy(x => x.ISIN).ToList();
             List<PortfolioAggregate> list = new List<PortfolioAggregate>();
+            decimal portfolioValue = 0;
+            
             foreach (var group in groups)
             {
                 int sumNum = group.Sum(x => x.Anzahl);
                 decimal sumValue = group.Sum(x => x.CurrentValue * x.Anzahl);
                 decimal averagePrice = sumValue / sumNum;
-                PortfolioAggregate record = new PortfolioAggregate()
+                PortfolioAggregate record = new PortfolioAggregate(() => portfolioValue)
                 {
                     ISIN = group.First().ISIN,
                     Produkt = group.First().Produkt,
-                    CurrentPrice = group.First().Price,
-                    AveragePrice = averagePrice
+                    CurrentPrice = group.First().CurrentValue,
+                    AveragePrice = group.First().Price,
+                    Anzahl = sumNum
                 };
-
+                portfolioValue += group.First().CurrentValue * sumNum;
                 list.Add(record);
             }
+            list.Sort((x,y) => y.Perf.CompareTo(x.Perf));
             this.dataGridView1.DataSource = list;
         }
 

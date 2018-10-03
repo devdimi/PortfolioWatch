@@ -70,7 +70,7 @@ namespace PortfolioWatch
                     }
                 }
 
-                finalList.Sort((x, y) => x.Perf.CompareTo(y.Perf));
+                finalList.Sort((x, y) => y.Perf.CompareTo(x.Perf));
                 return finalList;
             }
             else

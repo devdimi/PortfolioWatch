@@ -43,7 +43,8 @@ namespace PortfolioWatch
             line = line
                 .Replace("Symbol/ISIN", "ISIN")
                 .Replace("Wert,,Wert in EUR", "Currency,Wert,Wert in EUR")
-                .Replace(",Kurs ,,Wert in Lokalwährung,,Wert,,", ",Currency,Price,Wert in Lokalwährung,,Wert,,");
+                .Replace(",Kurs ,,Wert in Lokalwährung,,Wert,,", ",Currency,Price,Wert in Lokalwährung,,Wert,,")
+                .Replace("Schlußkurs", "ClosingRate");
 
 
             return line;

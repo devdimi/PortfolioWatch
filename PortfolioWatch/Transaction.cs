@@ -63,6 +63,7 @@ namespace PortfolioWatch
         public String Wert { get; set; }
         public String Currency { get; set; }
         public Int32 Anzahl { get; set; }
+        public decimal ClosingRate { get; set; }
         public decimal WertDecimal {
             get
             {
@@ -85,10 +86,19 @@ namespace PortfolioWatch
 
     public class PortfolioAggregate
     {
+        private Func<decimal> PortfolioValue;
+        public PortfolioAggregate(Func<decimal> portfolioValue)
+        {
+            this.PortfolioValue = portfolioValue;
+        }
+
         public String ISIN { get; set; }
         public String Produkt { get; set; }
         public decimal CurrentPrice { get; set; }
         public decimal AveragePrice { get; set; }
-        public decimal Perf { get; set; }
+        public decimal Perf { get { return (this.CurrentPrice - this.AveragePrice) / this.AveragePrice * 100; } }
+        public Int32 Anzahl { get; set; }
+        public decimal Value { get { return this.Anzahl * this.CurrentPrice; } }
+        public decimal Percent { get { return this.Value / PortfolioValue() * 100; } }
     }
 }
