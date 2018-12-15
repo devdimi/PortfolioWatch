@@ -1,4 +1,7 @@
 source https://nuget.org/api/v2
 
 nuget CsvHelper >= 3.0.0
-nuget NUnit
+nuget NUnit 3.11.0
+nuget XUnit
+nuget xunit.runner.console
+nuget Xunit.Runner.visualstudio

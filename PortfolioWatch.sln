@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioWatch", "PortfolioWatch\PortfolioWatch.csproj", "{C86BAF76-1D95-4A68-9A7C-C2B4EE1FB4F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioWatchTests", "PortfolioWatchTests\PortfolioWatchTests.csproj", "{DFC06F42-F473-4244-8213-6A8F8FD30CDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C86BAF76-1D95-4A68-9A7C-C2B4EE1FB4F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C86BAF76-1D95-4A68-9A7C-C2B4EE1FB4F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C86BAF76-1D95-4A68-9A7C-C2B4EE1FB4F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFC06F42-F473-4244-8213-6A8F8FD30CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFC06F42-F473-4244-8213-6A8F8FD30CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFC06F42-F473-4244-8213-6A8F8FD30CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFC06F42-F473-4244-8213-6A8F8FD30CDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
