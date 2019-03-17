@@ -16,6 +16,10 @@ namespace PortfolioWatchTests
             TransactionReader reader = new TransactionReader();
             TransactionCsv transaction = reader.ReadTransaction("13-12-2018,19:44,PT TELEKOMUNIKASI INDO,US7156841063,NSY,9,USD,26.6900,USD,-240.2100000,EUR,-211.3127370,1.1368,EUR,-0.53,EUR,-211.8427370");
             Assert.NotNull(transaction);
+            Assert.Equal(9, transaction.Anzahl);
+
+            Assert.Equal("USD", transaction.Currency);
+            Assert.Equal(26.69m, transaction.Price);
         }
     } 
 }

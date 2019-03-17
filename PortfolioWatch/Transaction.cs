@@ -16,27 +16,13 @@ namespace PortfolioWatch
         public decimal Price { get; set; }
         public String ISIN { get; set; }
         public Int32 Anzahl { get; set; }
-    }
-
-    public class Transaction : TransactionCsv
-    {
-        public Transaction(TransactionCsv transactionCsv)
-        {
-            this.Datum = transactionCsv.Datum;
-            this.Produkt = transactionCsv.Produkt;
-            this.Currency = transactionCsv.Currency;
-            this.Price = transactionCsv.Price;
-            this.ISIN = transactionCsv.ISIN;
-            this.Anzahl = transactionCsv.Anzahl;
-        }
 
         public decimal CurrentValue { get; set; }
-        
         public decimal Perf
         {
             get
             {
-                if(this.CurrentValue == default(decimal) || this.Price == default(decimal))
+                if (this.CurrentValue == default(decimal) || this.Price == default(decimal))
                 {
                     return 0;
                 }
@@ -50,6 +36,7 @@ namespace PortfolioWatch
         {
             get
             {
+                decimal numDays = (DateTime.Now - this.Datum).Days;
                 decimal numMonths = (decimal)(DateTime.Now - this.Datum).Days / (decimal)30;
                 decimal perfPerMonth = this.Perf / numMonths;
                 return perfPerMonth;
@@ -59,29 +46,31 @@ namespace PortfolioWatch
 
     public class PortfolioRecord
     {
+        public String Produkt { get; set; }
         public string ISIN { get; set; }
-        public String Wert { get; set; }
+        public decimal Wert { get; set; }
+        public decimal WertEUR { get; set; }
         public String Currency { get; set; }
         public Int32 Anzahl { get; set; }
         public decimal ClosingRate { get; set; }
-        public decimal WertDecimal {
-            get
-            {
-                if(String.IsNullOrEmpty(this.Wert))
-                {
-                    return default(decimal);
-                }
+        ////public decimal WertDecimal {
+        ////    get
+        ////    {
+        ////        if(String.IsNullOrEmpty(this.Wert))
+        ////        {
+        ////            return default(decimal);
+        ////        }
 
-                var r = this.Wert.Replace("\"", String.Empty); ////.Replace(",", ".");
-                decimal result;
-                if(decimal.TryParse(r, out result))
-                {
-                    return result;
-                }
+        ////        var r = this.Wert.Replace("\"", String.Empty); ////.Replace(",", ".");
+        ////        decimal result;
+        ////        if(decimal.TryParse(r, out result))
+        ////        {
+        ////            return result;
+        ////        }
 
-                return default(decimal);
-            }
-        }
+        ////        return default(decimal);
+        ////    }
+        ////}
     }
 
     public class PortfolioAggregate

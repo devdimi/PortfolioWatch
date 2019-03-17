@@ -38,35 +38,51 @@ namespace PortfolioWatch
         public object GetData(String transactionsFile, String portfolioFile)
         {
             String transactions = transactionsFile;
-            List<TransactionCsv> list = null;
-            List<PortfolioRecord> portfolioList = null;
+            List<TransactionCsv> list = new List<TransactionCsv>();
+            List<PortfolioRecord> portfolioList = new List<PortfolioRecord>();
 
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("de-DE");
             Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
 
-            FixingReader reader1 = new FixingReader(transactions);
             using (StreamReader reader = new StreamReader(transactions))
             {
-                CsvReader csv = Create(reader);    
-                list = csv.GetRecords<TransactionCsv>().ToList();
+                ////CsvReader csv = Create(reader);
+                TransactionReader transactionReader = new TransactionReader();
+                string line;
+                reader.ReadLine(); // skip header
+                while (null != (line = reader.ReadLine()))
+                {
+                    TransactionCsv tr = transactionReader.ReadTransaction(line);
+                    list.Add(tr);
+                }
+
+                ////list = csv.GetRecords<TransactionCsv>().ToList();
             }
 
             if (!String.IsNullOrEmpty(portfolioFile) && File.Exists(portfolioFile))
             {
-                reader1 = new FixingReader(portfolioFile);
+                ////reader1 = new FixingReader(portfolioFile);
                 using (StreamReader reader = new StreamReader(portfolioFile))
                 {
-                    CsvReader csv = Create(reader);
-                    portfolioList = csv.GetRecords<PortfolioRecord>().ToList();
+                    PortfolioReader porfolioReader = new PortfolioReader();
+                    string line;
+                    reader.ReadLine(); // skip header
+                    while (null != (line = reader.ReadLine()))
+                    {
+                        PortfolioRecord record = porfolioReader.Read(line);
+                        portfolioList.Add(record);
+                    }
+                    
                 }
 
-                List<Transaction> finalList = new List<Transaction>();
+                List<TransactionCsv> finalList = new List<TransactionCsv>();
                 foreach (var trans in list)
                 {
                     PortfolioRecord match = portfolioList.FirstOrDefault(x => x.ISIN == trans.ISIN);
                     if (match != null)
                     {
-                        finalList.Add(new Transaction(trans) { CurrentValue = match.WertDecimal / match.Anzahl });
+                        trans.CurrentValue = match.Wert / match.Anzahl;
+                        finalList.Add(trans);
                     }
                 }
 

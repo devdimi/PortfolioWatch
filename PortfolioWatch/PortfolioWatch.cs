@@ -22,7 +22,7 @@ namespace PortfolioWatch
             InitializeComponent();
         }
 
-        List<Transaction> transactions;
+        List<TransactionCsv> transactions;
         
         private void btnLoad_Click(object sender, EventArgs e)
         {
@@ -34,7 +34,7 @@ namespace PortfolioWatch
 
             var records = dao.GetData(this.txtTransactions.Text, this.txtPortfolio.Text);
             this.dataGridView1.DataSource = records;
-            this.transactions = records as List<Transaction>;
+            this.transactions = records as List<TransactionCsv>;
         }
 
         private void Form1_Load(object sender, EventArgs e)
